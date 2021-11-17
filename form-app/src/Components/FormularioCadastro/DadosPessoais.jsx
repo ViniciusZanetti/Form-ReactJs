@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Switch, FormControlLabel } from "@material-ui/core";
 
-function DadosPessoais({aoEnviar, aoValidar}) {
+function DadosPessoais({aoEnviar, validarCPF}) {
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
   const [cpf, setCpf] = useState("");
@@ -47,7 +47,7 @@ function DadosPessoais({aoEnviar, aoValidar}) {
         error={!erros.cpf.valido}
         helperText={erros.cpf.mensagem}
         onBlur={(event) => {
-          const ehValido = aoValidar(event.target.value);
+          const ehValido = validarCPF(event.target.value);
           setErros({cpf:ehValido});
         }}
         label="CPF"

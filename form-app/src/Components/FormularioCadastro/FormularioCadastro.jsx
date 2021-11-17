@@ -1,41 +1,41 @@
-import { Step, StepLabel, Stepper, Typography } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
-import DadosEntrega from "./DadosEntrega";
+import React, { useState, useEffect } from "react";
 import DadosPessoais from "./DadosPessoais";
 import DadosUsuarios from "./DadosUsuarios";
+import DadosEntrega from "./DadosEntrega";
+import { Typography, Stepper, Step, StepLabel } from "@material-ui/core";
 
 function FormularioCadastro({ aoEnviar, aoValidar }) {
   const [etapaAtual, setEtapaAtual] = useState(0);
   const [dadosColetados, setDados] = useState({});
-  useEffect(() => {
-    if (etapaAtual === formulario.length) {
-      console.log(dadosColetados);
+ 
+  useEffect(()=>{
+    if(etapaAtual === formularios.length-1){
+      aoEnviar(dadosColetados);
     }
-  });
+  })
 
-  const formulario = [
+  const formularios = [
     <DadosUsuarios aoEnviar={coletarDados} />,
-    <DadosPessoais aoEnviar={coletarDados} aoValidar={aoValidar} />,
+    <DadosPessoais aoEnviar={coletarDados} validarCPF={aoValidar} />,
     <DadosEntrega aoEnviar={coletarDados} />,
-    <Typography variant="h5">Obrigado por se cadastrar!</Typography>
+    <Typography variant="h5">Obrigado pelo Cadastro!</Typography>
   ];
 
-  function coletarDados(dados) {
-    setDados({ ...dadosColetados, ...dados });
+  function coletarDados(dados){
+    setDados({...dadosColetados, ...dados});
     proximo();
   }
   function proximo() {
     setEtapaAtual(etapaAtual + 1);
   }
-
   return <>
   <Stepper activeStep={etapaAtual}>
-  <Step><StepLabel>Login</StepLabel></Step>
-  <Step><StepLabel>Pessoal</StepLabel></Step>
-  <Step><StepLabel>Entrega</StepLabel></Step>
-  <Step><StepLabel>Finalização</StepLabel></Step>
+    <Step><StepLabel>Login</StepLabel></Step>
+    <Step><StepLabel>Pessoal</StepLabel></Step>
+    <Step><StepLabel>Entrega</StepLabel></Step>
+    <Step><StepLabel>Finalização</StepLabel></Step>
   </Stepper>
-  {formulario[etapaAtual]}
+  {formularios[etapaAtual]}
   </>;
 }
 
