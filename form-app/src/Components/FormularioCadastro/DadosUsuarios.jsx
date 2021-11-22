@@ -26,7 +26,7 @@ function DadosUsuarios({aoEnviar}) {
         fullWidth
       />
       <Button variant="contained" color="primary" type="submit">
-        Cadastrar
+        Próximo
       </Button>
     </form>
   );
